@@ -9,13 +9,14 @@ export default function Home() {
   const [prevWeather, setPrevWeather] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [searchingCity, setSearchingCity] = useState<string | null>(null);
 
   const hasResults = !!weather || !!error;
 
   const handleSearch = async (city: string) => {
     setLoading(true);
     setError(null);
-    setPrevWeather(weather);
+    setSearchingCity(city);
     try {
       const res = await fetch("/api/weather", {
         method: "POST",
@@ -26,12 +27,14 @@ export default function Home() {
       if (!res.ok) {
         throw new Error(data.error || "Error fetching weather");
       }
+      setPrevWeather(weather);
       setWeather(data);
     } catch (err: any) {
       setWeather(null);
       setError(err.message || "Error fetching weather");
     } finally {
       setLoading(false);
+      setSearchingCity(null);
     }
   };
 
@@ -53,18 +56,16 @@ export default function Home() {
           <div className="relative flex justify-center mt-4 w-full min-h-[260px]">
             <div
               className={`absolute w-full transition-opacity duration-700 ${
-                loading && prevWeather
+                loading && searchingCity
                   ? "opacity-100 pointer-events-none"
                   : "opacity-0 pointer-events-none"
               }`}
               style={{ zIndex: 1 }}
             >
-              {loading && prevWeather && (
-                <WeatherResults
-                  weather={prevWeather}
-                  loading={false}
-                  error={null}
-                />
+              {loading && searchingCity && (
+                <div className="flex justify-center mt-4">
+                  <div className="loader" />
+                </div>
               )}
             </div>
             <div

@@ -1,5 +1,4 @@
 import React from "react";
-import Spinner from "../Icons/SpinnerIcon";
 
 type ButtonProps = {
   className?: string;
@@ -19,12 +18,13 @@ const Button: React.FC<ButtonProps> = ({
   loading = false,
 }) => (
   <button
-    className={`font-bold py-2 px-4 rounded-lg cursor-pointer flex items-center justify-center ${className}`}
+    className={`font-bold py-2 bg-orange-500 px-4 rounded-lg cursor-pointer flex items-center justify-center ${className} ${
+      loading ? "opacity-50" : ""
+    }`}
     onClick={onClick}
     type={type}
     disabled={disabled || loading}
   >
-    {loading && <Spinner />}
     {children}
   </button>
 );

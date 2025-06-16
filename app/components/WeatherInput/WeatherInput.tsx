@@ -35,7 +35,7 @@ const WeatherInput: React.FC<WeatherInputProps> = ({
         />
         <Button
           type="submit"
-          className="bg-blue-500 ml-2 px-3 py-1 rounded w-40 text-white"
+          className="ml-2 px-3 py-1 w-40 text-white"
           disabled={loading || !city}
           loading={loading}
         >
