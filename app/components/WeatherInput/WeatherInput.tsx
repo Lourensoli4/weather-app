@@ -25,8 +25,11 @@ const WeatherInput: React.FC<WeatherInputProps> = ({
 
   return (
     <Card className="bg-white max-w-sm">
-      <h3>Enter a city</h3>
-      <form onSubmit={handleSubmit} className="flex items-center">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-wrap justify-center items-center gap-4"
+      >
+        <h3>Enter a city</h3>
         <Input
           type="search"
           value={city}
@@ -35,7 +38,7 @@ const WeatherInput: React.FC<WeatherInputProps> = ({
         />
         <Button
           type="submit"
-          className="ml-2 px-3 py-1 w-40 text-white"
+          className="px-3 py-1 w-40 text-white"
           disabled={loading || !city}
           loading={loading}
         >
