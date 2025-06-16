@@ -2,23 +2,57 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+### Running the Application Locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Install dependencies:**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+2. **Set up environment variables:**
+
+   - Create a `.env.local` file in the root directory.
+   - Add your OpenWeatherMap API key:
+     ```
+     OPENWEATHER_API_KEY=your_api_key_here
+     ```
+
+3. **Run the development server:**
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Temperature Display
+
+- **All temperatures are displayed in Celsius.**
+
+## Design Decisions
+
+- **API Integration:** The app uses the OpenWeatherMap API for both geocoding (city to coordinates) and weather data. This ensures accurate and up-to-date weather information.
+- **UI/UX:** The interface is built with React components and styled using Tailwind CSS for rapid development and a modern look.
+- **Error Handling:** The app provides clear error messages for invalid city names, API errors, and missing API keys.
+- **Loading State:** A custom loader is shown while fetching data to improve user experience.
+- **Component Structure:** The app is modular, with separate components for input, results, and UI elements, making it easy to maintain and extend.
 
 ## Learn More
 

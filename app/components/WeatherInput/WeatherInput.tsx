@@ -29,7 +29,7 @@ const WeatherInput: React.FC<WeatherInputProps> = ({
         onSubmit={handleSubmit}
         className="flex flex-wrap justify-center items-center gap-4"
       >
-        <h3>Enter a city</h3>
+        <h3>Search for a city</h3>
         <Input
           type="search"
           value={city}
