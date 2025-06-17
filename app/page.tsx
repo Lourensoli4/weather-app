@@ -3,10 +3,10 @@
 import { useState } from "react";
 import WeatherInput from "./components/WeatherInput/WeatherInput";
 import WeatherResults from "./components/WeatherResults/WeatherResults";
+import { Weather, WeatherApiResponse } from "./types/Weather";
 
 export default function Home() {
-  const [weather, setWeather] = useState<any>(null);
-  const [prevWeather, setPrevWeather] = useState<any>(null);
+  const [weather, setWeather] = useState<Weather | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchingCity, setSearchingCity] = useState<string | null>(null);
@@ -23,15 +23,20 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ city }),
       });
-      const data = await res.json();
+      const data: WeatherApiResponse = await res.json();
       if (!res.ok) {
-        throw new Error(data.error || "Error fetching weather");
+        if ("error" in data) {
+          throw new Error(data.error);
+        }
+        throw new Error("Error fetching weather");
       }
-      setPrevWeather(weather);
+      if ("error" in data) {
+        throw new Error(data.error);
+      }
       setWeather(data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setWeather(null);
-      setError(err.message || "Error fetching weather");
+      setError(err instanceof Error ? err.message : "Error fetching weather");
     } finally {
       setLoading(false);
       setSearchingCity(null);

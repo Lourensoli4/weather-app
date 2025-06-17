@@ -1,8 +1,9 @@
 import Image from "next/image";
 import getRoundedNumber from "../../utils/getRoundedNumber";
+import { Weather } from "@/app/types/Weather";
 
 type WeatherResultsProps = {
-  weather: any;
+  weather: Weather | null;
   loading: boolean;
   error: string | null;
 };
